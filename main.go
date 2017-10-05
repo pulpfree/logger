@@ -53,24 +53,24 @@ func logsHandler(e *auth.Env) Adapter {
 			}
 
 			if r.Method != "POST" {
-				respondErr(w, http.StatusMethodNotAllowed, nil, "LoggerHandler")
+				respondErr(w, http.StatusMethodNotAllowed, nil, "logsHandler")
 				return
 			}
 
 			if r.Body == nil {
 				err := errors.New("Missing body in request")
-				respondErr(w, http.StatusBadRequest, err, "LoggerHandler")
+				respondErr(w, http.StatusBadRequest, err, "logsHandler")
 				return
 			}
 
 			logger := new(model.Logger)
 			if err := json.NewDecoder(r.Body).Decode(&logger.Body); err != nil {
-				respondErr(w, http.StatusBadRequest, err, "LoginHandler")
+				respondErr(w, http.StatusBadRequest, err, "logsHandler")
 				return
 			}
 
 			if err := logger.Record(e.DB); err != nil {
-				respondErr(w, http.StatusBadRequest, err, "LoginHandler")
+				respondErr(w, http.StatusBadRequest, err, "logsHandler")
 				return
 			}
 
